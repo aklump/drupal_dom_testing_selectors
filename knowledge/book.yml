@@ -1,0 +1,9 @@
+title: Seao
+uuid: 630d3634-bd39-4a0d-8319-3e265f26af29
+chapters:
+  -
+    id: general
+    title: General
+    pages:
+      - readme
+      - changelog

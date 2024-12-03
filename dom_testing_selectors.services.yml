@@ -1,0 +1,6 @@
+services:
+  dom_testing_selectors.factory:
+    class: \Drupal\dom_testing_selectors\Factory\DrupalFactory
+  dom_testing_selectors.selector:
+    class: \AKlump\DomTestingSelectors\Selector\DataTestSelector
+

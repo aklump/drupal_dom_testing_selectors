@@ -1,0 +1,6 @@
+name: DOM Testing Selectors
+description: Add specific markup to your DOM for testing purposes.
+package: Development
+type: module
+core_version_requirement: ^10
+version: '0.0.0'

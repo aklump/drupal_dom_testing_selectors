@@ -1,0 +1,9 @@
+*.jig.*
+.idea/
+/vendor/
+composer.lock
+feature--*.md
+node_modules/
+package.lock
+/bin/bind_book.sh
+/bin/flush_book.sh

@@ -1,0 +1,28 @@
+{
+  "name": "aklump_drupal/dom_testing_selectors",
+  "description": "This library offers a PHP solution designed to add specific markup to your DOM for testing purposes.",
+  "type": "drupal-custom-module",
+  "license": "GPL-2.0+",
+  "homepage": "https://drupal.org/project/dom_testing_selectors",
+  "authors": [
+    {
+      "name": "Aaron Klump (aklump)",
+      "homepage": "https://www.drupal.org/u/aklump",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "aklump/dom-testing-selectors": "^0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Drupal\\dom_testing_selectors\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Drupal\\Tests\\dom_testing_selectors\\": "./tests/"
+    }
+  }
+}
