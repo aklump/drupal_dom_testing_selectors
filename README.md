@@ -28,24 +28,29 @@ Provides a method of adding specific markup to your DOM for testing purposes.
     });
     ```
 
-## Installation
+## Install with Composer
 
-1. Download this module to _install/composer/dom_testing_selectors_.
-2. Add the following to the application's _composer.json_ above web root.
-
+1. Because this is an unpublished package, you must define it's repository in
+   your project's _composer.json_ file. Add the following to _composer.json_ in
+   the `repositories` array:
+   
     ```json
     {
-      "repositories": [
-        {
-          "type": "path",
-          "url": "install/composer/dom_testing_selectors"
-        }
-      ]
+     "type": "github",
+     "url": "https://github.com/aklump/drupal_dom_testing_selectors"
     }
     ```
-3. Add `web/modules/custom/dom_testing_selectors` top-level _.gitignore_ (IMPORTANT! no trailing slash)!
-4. Now run `composer require aklump_drupal/dom_testing_selectors:@dev`
-5. Enable this module.
+1. Require this package:
+   
+    ```
+    composer require aklump_drupal/dom_testing_selectors:@dev
+    ```
+1. Add the installed directory to _.gitignore_
+   
+   ```php
+   /web/modules/custom/dom_testing_selectors/
+   ```
+1. Enable this module.
 
 ## Usage
 
