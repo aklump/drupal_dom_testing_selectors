@@ -43,7 +43,7 @@ Provides a method of adding specific markup to your DOM for testing purposes.
 1. Require this package:
    
     ```
-    composer require aklump_drupal/dom_testing_selectors:@dev
+    composer require aklump_drupal/dom_testing_selectors:^0.0
     ```
 1. Add the installed directory to _.gitignore_
    
