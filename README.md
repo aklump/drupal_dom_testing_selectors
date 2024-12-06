@@ -65,7 +65,7 @@ To list this module as a dependency of another do the following:
     dependencies:
       aklump_drupal:dom_testing_selectors
     ```
-2. **Do not run `composer require` inside your depending module, but rather ONLY at the root level as shown above.**
+2. **Do not run `composer require aklump_drupal/dom_testing_selectors:^0.0` inside your depending module, but rather ONLY at the root level as shown above.**
 
 ## Usage
 
