@@ -139,3 +139,7 @@ class MyModuleServiceProvider implements \Drupal\Core\DependencyInjection\Servic
 
 }
 ```
+
+## Known Plugins
+
+* [Loft Core Cypress Selector](https://github.com/aklump/loft-core-cypress-selector)
