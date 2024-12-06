@@ -34,7 +34,6 @@ Provides a method of adding specific markup to your DOM for testing purposes.
     ```
 
 {{ composer.install|raw }}
-1. Enable this module.
 
 ## Usage
 
