@@ -45,7 +45,10 @@ Because this is an unpublished, custom Drupal module, the way you install and de
      "url": "https://github.com/aklump/drupal_dom_testing_selectors"
     }
     ```
-2. Again from the root, run `composer require aklump_drupal/dom_testing_selectors:^0.0`
+2. Again from the root, run:
+    ```
+    composer require aklump_drupal/dom_testing_selectors:^0.0
+    ```
 3. Add the installed directory to _.gitignore_
    
    ```php
