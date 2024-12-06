@@ -28,44 +28,58 @@ Provides a method of adding specific markup to your DOM for testing purposes.
     });
     ```
 
-##  Install with Composer
-
+## Install with Composer
 
 Because this is an unpublished, custom Drupal module, the way you install and depend on it is a little different than published, contributed modules.
 
-### At the Root-Level of Drupal
-
-(_The root-level is one above webroot._)
-
-1. Add the following to the **root-level** _composer.json_ in the `repositories`
-   array:
+* Add the following to the **root-level** _composer.json_ in the `repositories` array:
     ```json
     {
      "type": "github",
      "url": "https://github.com/aklump/drupal_dom_testing_selectors"
     }
     ```
-2. Again from the root, run:
-    ```
-    composer require aklump_drupal/dom_testing_selectors:^0.0
-    ```
-3. Add the installed directory to _.gitignore_
-   
+* Add the installed directory to **root-level** _.gitignore_
+  
    ```php
    /web/modules/custom/dom_testing_selectors/
    ```
-4. Enable this module, e.g. `drush pm-install dom_testing_selectors`
-
-### Depend on This Module
-
-To list this module as a dependency of another do the following:
-
-1. In the depending module's info file add:
-    ```yaml
-    dependencies:
-      aklump_drupal:dom_testing_selectors
+* Proceed to either A or B, but not both.
+---
+### A. Install Standalone
+* Require _dom_testing_selectors_ at the **root-level**.
     ```
-2. **Do not run `composer require aklump_drupal/dom_testing_selectors:^0.0` inside your depending module, but rather ONLY at the root level as shown above.**
+    composer require aklump_drupal/dom_testing_selectors:^0.0
+    ```
+---
+### B. Depend on This Module
+
+(_Replace `my_module` with your module's real name._)
+
+* Add the following to _my_module/composer.json_ in the `repositories` array. (_Yes, this is done both here and at the root-level._)
+    ```json
+    {
+     "type": "github",
+     "url": "https://github.com/aklump/drupal_dom_testing_selectors"
+    }
+    ```
+* From the depending module directory run:
+    ```
+    composer require aklump_drupal/dom_testing_selectors:^0.0 --no-update
+    ```
+* Add the following to _my_module.info.yml_ in the `dependencies` array:
+    ```yaml
+    aklump_drupal:dom_testing_selectors
+    ```
+* Back at the **root-level** run `composer update my_module`
+---
+### Enable This Module
+
+* Re-build Drupal caches, if necessary.
+* Enable this module, e.g.,
+  ```shell
+  drush pm-install dom_testing_selectors
+  ```
 
 ## Usage
 
