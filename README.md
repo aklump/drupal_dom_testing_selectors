@@ -30,7 +30,7 @@ Provides a method of adding specific markup to your DOM for testing purposes.
 
 ## Install with Composer
 
-Because this is an unpublished, custom Drupal module, the way you install and depend on it is a little different than published, contributed modules.
+Because this is an unpublished, custom Drupal extension, the way you install and depend on it is a little different than published, contributed extensions.
 
 * Add the following to the **root-level** _composer.json_ in the `repositories` array:
     ```json
@@ -53,7 +53,6 @@ Because this is an unpublished, custom Drupal module, the way you install and de
     ```
 ---
 ### B. Depend on This Module
-
 (_Replace `my_module` with your module's real name._)
 
 * Add the following to _my_module/composer.json_ in the `repositories` array. (_Yes, this is done both here and at the root-level._)
@@ -67,11 +66,14 @@ Because this is an unpublished, custom Drupal module, the way you install and de
     ```
     composer require aklump_drupal/dom_testing_selectors:^0.0 --no-update
     ```
+
 * Add the following to _my_module.info.yml_ in the `dependencies` array:
     ```yaml
     aklump_drupal:dom_testing_selectors
     ```
 * Back at the **root-level** run `composer update my_module`
+
+
 ---
 ### Enable This Module
 
