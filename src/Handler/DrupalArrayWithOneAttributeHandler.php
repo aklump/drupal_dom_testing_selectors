@@ -8,13 +8,19 @@ use Drupal\Core\Template\Attribute;
 
 class DrupalArrayWithOneAttributeHandler implements HandlerInterface {
 
+  use HandlerTrait;
+
   public function canHandle($element): bool {
-    return count($this->getAttributeKeys($element)) === 1;
+    return is_array($element) && count($this->getAttributeKeys($element)) === 1;
   }
 
   public function setTestingSelectorOnElement(&$element, ElementSelectorInterface $selector): void {
     $key = $this->getAttributeKeys($element)[0];
-    $element[$key]->offsetSet($selector->getAttributeName(), $selector->getAttributeValue());
+    $attribute_name = $selector->getAttributeName();
+    $current_value = $element[$key]->offsetGet($attribute_name);
+    $current_value = $current_value ? $current_value->getValue() : '';
+    $attribute_value = $this->getAttributeValueBySelector($selector, $current_value);
+    $element[$key]->offsetSet($attribute_name, $attribute_value);
   }
 
   private function getAttributeKeys(array $array) {

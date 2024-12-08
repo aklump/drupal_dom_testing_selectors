@@ -12,6 +12,8 @@ use InvalidArgumentException;
  */
 class DrupalRenderArrayHandler implements HandlerInterface {
 
+  use HandlerTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -30,35 +32,10 @@ class DrupalRenderArrayHandler implements HandlerInterface {
    * {@inheritdoc}
    */
   public function setTestingSelectorOnElement(&$element, ElementSelectorInterface $selector): void {
-    if (!$this->canHandle($element)) {
-      throw new InvalidArgumentException();
-    }
-
-    $current_value = $this->getCurrentValue($element, $selector);
-    if (!is_array($current_value)) {
-      $attribute_value = $selector->getAttributeValue($current_value);
-    }
-    else {
-      $current_value = implode(' ', $current_value);
-      $attribute_value = $selector->getAttributeValue($current_value);
-      $attribute_value = explode(' ', $attribute_value);
-    }
-
-    $element['#attributes'][$selector->getAttributeName()] = $attribute_value;
+    $attribute_name = $selector->getAttributeName();
+    $current_value = $element['#attributes'][$attribute_name] ?? '';
+    $attribute_value = $this->getAttributeValueBySelector($selector, $current_value);
+    $element['#attributes'][$attribute_name] = $attribute_value;
   }
 
-  /**
-   * Get the current value of an element's attribute
-   *
-   * @param mixed $element The element from which to retrieve the attribute value.
-   * @param ElementSelectorInterface $selector The selector used to determine the attribute name.
-   *
-   * @return mixed The current value of the attribute.
-   */
-  private function getCurrentValue($element, ElementSelectorInterface $selector) {
-    // TODO Are there other Drupal attributes that might be stored as arrays?
-    $fallback_value = $selector->getAttributeName() === 'class' ? [] : '';
-
-    return $element['#attributes'][$selector->getAttributeName()] ?? $fallback_value;
-  }
 }

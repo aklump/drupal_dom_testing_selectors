@@ -9,12 +9,11 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \AKlump\DomTestingSelectors\Handler\DrupalTableDataHandler()
+ * @covers \Drupal\dom_testing_selectors\Handler\DrupalTableHandler
  * @uses   \AKlump\DomTestingSelectors\Selector\AbstractSelector
  * @uses   \AKlump\DomTestingSelectors\Selector\DataTestSelector
  */
 class DrupalTableHandlerTest extends TestCase {
-
 
   public static function dataForSetTestingSelectorOnElementProvider(): array {
     $tests = [];
@@ -116,9 +115,6 @@ class DrupalTableHandlerTest extends TestCase {
    * @dataProvider dataForSetTestingSelectorOnElementProvider
    */
   public function testTableHandling(array $element, bool $assert_string_keys) {
-    //    var_export($element);
-    //    echo PHP_EOL;
-    //    die;
     $marker = new DataTestSelector();
     $marker->setName('mytable');
     (new DrupalTableHandler())->setTestingSelectorOnElement($element, $marker);

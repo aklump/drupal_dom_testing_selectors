@@ -9,6 +9,8 @@ use InvalidArgumentException;
 
 class DrupalTableHandler implements HandlerInterface {
 
+  use HandlerTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -20,27 +22,27 @@ class DrupalTableHandler implements HandlerInterface {
    * {@inheritdoc}
    */
   public function setTestingSelectorOnElement(&$table_element, ElementSelectorInterface $selector): void {
-    if (!$this->canHandle($table_element)) {
-      throw new InvalidArgumentException();
-    }
-
-    $table_element['#attributes'][$selector->getAttributeName()] = $selector->getAttributeValue();
+    $selector_attribute_name = $selector->getAttributeName();
+    $current_value = $table_element['#attributes'][$selector_attribute_name] ?? '';
+    $base__testing_selector = $this->getAttributeValueBySelector($selector, $current_value);
+    $table_element['#attributes'][$selector_attribute_name] = $base__testing_selector;
 
     $row_index = 1;
     foreach ($table_element['#rows'] as &$row) {
-      $row_selector = clone $selector;
-      $basename = $row_selector->getAttributeValue();
-      $row_selector->setName($basename . '_r' . $row_index);
-
       $this->placeInDataKeyIfMissing($row);
 
-      $row_testing_marker = $row[$row_selector->getAttributeName()] ?? $row_selector->getAttributeValue();
-      $row[$row_selector->getAttributeName()] = $row_testing_marker;
+      $row__current_value = $row[$selector_attribute_name] ?? '';
+      $row_selector = clone $selector;
+      $row_selector->setName($base__testing_selector . '_r' . $row_index);
+
+      $row__testing_selector = $this->getAttributeValueBySelector($row_selector, $row__current_value);
+      $row[$selector_attribute_name] = $row__testing_selector;
       $cell_index = 1;
       foreach ($row['data'] as $cell_key => &$cell) {
-        $row_selector->setName($row_testing_marker . $this->getCellName($cell_key, $cell_index));
+        $row_selector->setName($row__testing_selector . $this->getCellTestingSelector($cell_key, $cell_index));
         $this->placeInDataKeyIfMissing($cell);
-        $cell[$row_selector->getAttributeName()] = $row_selector->getAttributeValue();
+        $cell__current_value = $cell[$selector_attribute_name] ?? '';
+        $cell[$selector_attribute_name] = $this->getAttributeValueBySelector($row_selector, $cell__current_value);
         ++$cell_index;
       }
       unset($cell);
@@ -49,7 +51,7 @@ class DrupalTableHandler implements HandlerInterface {
     unset($row);
   }
 
-  private function placeInDataKeyIfMissing(mixed &$array) {
+  private function placeInDataKeyIfMissing(&$array) {
     if (is_array($array) && array_key_exists('data', $array)) {
       return;
     }
@@ -57,7 +59,7 @@ class DrupalTableHandler implements HandlerInterface {
     $array = ['data' => $array];
   }
 
-  private function getCellName($cell_key, int $cell_index): string {
+  private function getCellTestingSelector($cell_key, int $cell_index): string {
     if (!is_numeric($cell_key)) {
       return '_' . $cell_key;
     }

@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \AKlump\DomTestingSelectors\Handler\DrupalTableDataHandler()
+ * @covers \Drupal\dom_testing_selectors\Handler\DrupalTableDataHandler
  * @uses   \AKlump\DomTestingSelectors\Selector\AbstractSelector
  * @uses   \AKlump\DomTestingSelectors\Selector\DataTestSelector
  */
@@ -69,23 +69,14 @@ class DrupalTableDataHandlerTest extends TestCase {
     $this->assertSame($expected, $foo->canHandle($subject));
   }
 
-  /**
-   * @dataProvider dataFortestAppliesProvider
-   */
-  public function testAppliesThrowsWhenBadSubject($subject, bool $expected) {
-    $foo = new DrupalTableDataHandler();
-    if (TRUE === $expected) {
-      $this->assertTrue(TRUE);
-
-      return;
-    }
-
-    $this->expectException(InvalidArgumentException::class);
-    $foo->setTestingSelectorOnElement($expected, new DataTestSelector());
-  }
-
   public function dataFortestHandleProvider() {
     $tests = [];
+//    $tests[] = [
+//      [['foo', 'bar']],
+//      'foo',
+//      [['foo', 'bar']],
+//    ];
+//    return $tests;
     $tests[] = [
       [
         'data' => ['name' => 'Andrew', 'age' => 36],

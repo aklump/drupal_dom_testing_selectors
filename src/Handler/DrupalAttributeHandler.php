@@ -8,12 +8,19 @@ use Drupal\Core\Template\Attribute;
 
 class DrupalAttributeHandler implements HandlerInterface {
 
+  use HandlerTrait;
+
   public function canHandle($element): bool {
     return $element instanceof Attribute;
   }
 
   public function setTestingSelectorOnElement(&$element, ElementSelectorInterface $selector): void {
-    $element->offsetSet($selector->getAttributeName(), $selector->getAttributeValue());
+    $attribute_name = $selector->getAttributeName();
+    $current_value = $element->offsetGet($attribute_name);
+    $current_value = $current_value ? $current_value->value() : '';
+    $attribute_value = $this->getAttributeValueBySelector($selector, $current_value);
+    $element->offsetSet($attribute_name, $attribute_value);
+
   }
 
 }

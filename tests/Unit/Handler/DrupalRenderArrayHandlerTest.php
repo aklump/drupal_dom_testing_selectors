@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \AKlump\DomTestingSelectors\Handler\DrupalRenderArrayHandler()
+ * @covers \Drupal\dom_testing_selectors\Handler\DrupalRenderArrayHandler
  * @uses   \AKlump\DomTestingSelectors\Selector\AbstractSelector
  * @uses   \AKlump\DomTestingSelectors\Selector\DataTestSelector
  */
@@ -35,21 +35,6 @@ class DrupalRenderArrayHandlerTest extends TestCase {
   public function testApplies($subject, bool $expected) {
     $foo = new DrupalRenderArrayHandler();
     $this->assertSame($expected, $foo->canHandle($subject));
-  }
-
-  /**
-   * @dataProvider dataFortestAppliesProvider
-   */
-  public function testAppliesThrowsWhenBadSubject($subject, bool $expected) {
-    $foo = new DrupalRenderArrayHandler();
-    if (TRUE === $expected) {
-      $this->assertTrue(TRUE);
-
-      return;
-    }
-
-    $this->expectException(InvalidArgumentException::class);
-    $foo->setTestingSelectorOnElement($expected, new DataTestSelector());
   }
 
   public function dataFortestHandleProvider() {
