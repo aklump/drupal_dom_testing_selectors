@@ -3,4 +3,4 @@ description: Add specific markup to your DOM for testing purposes.
 package: Development
 type: module
 core_version_requirement: ^9 || ^10
-version: '0.0.4'
+version: '0.0.5'
